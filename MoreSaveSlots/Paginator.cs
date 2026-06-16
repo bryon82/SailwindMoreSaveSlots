@@ -49,9 +49,9 @@ namespace MoreSaveSlots
                 && btn.saveSlot < SaveSlots.slotsActive.Length
                 && SaveSlots.slotsActive[btn.saveSlot])
             {
-                string timestamp = btn.transform.parent.GetChild(1).GetComponent<TextMesh>().text;
-                string name = SaveNameInput.LoadName(btn.saveSlot);
-                string displayText = name != null ? $"{name}\n{timestamp}" : timestamp;
+                var timestamp = btn.transform.parent.GetChild(1).GetComponent<TextMesh>().text;
+                var name = SaveNameInput.LoadName(btn.saveSlot);
+                var displayText = name != null ? $"{name}\n{timestamp}" : timestamp;
                 btn.SetButtonText(displayText);
             }
             else
@@ -66,10 +66,9 @@ namespace MoreSaveSlots
             SaveSlotsUI.HideRenameInput();
             _backUpSavesListUI.HideList();
             _currentPage = Mathf.Max(0, _currentPage - 1);
-            SaveSlotsUI.SetTextColor(false, true);
-            SaveSlotsUI.SetTextColor(true, true);
+            SaveSlotsUI.SetChangePageTextColor(SaveSlotsUI.PREVIOUS_BUTTON, true, true);
             if (_currentPage == 0)            
-                SaveSlotsUI.SetTextColor(true, false);
+                SaveSlotsUI.SetChangePageTextColor(SaveSlotsUI.PREVIOUS_BUTTON, false);
             SaveSlotsUI.UpdatePageNumText(_currentPage);
             ShowPage(_currentPage);
             LogDebug($"Previous button clicked, showing page {_currentPage}");
@@ -81,14 +80,13 @@ namespace MoreSaveSlots
             SaveSlotsUI.HideRenameInput();
             _backUpSavesListUI.HideList();
             _currentPage = Mathf.Min(numPages.Value - 1, _currentPage + 1);
-            SaveSlotsUI.SetTextColor(false, true);
-            SaveSlotsUI.SetTextColor(true, true);
+            SaveSlotsUI.SetChangePageTextColor(SaveSlotsUI.NEXT_BUTTON, true, true);
             if (_currentPage == numPages.Value - 1)
-                SaveSlotsUI.SetTextColor(false, false);
+                SaveSlotsUI.SetChangePageTextColor(SaveSlotsUI.NEXT_BUTTON, false);
             SaveSlotsUI.UpdatePageNumText(_currentPage);
             ShowPage(_currentPage);
             LogDebug($"Next button clicked, showing page {_currentPage}");
-        }        
+        }
 
         private static void ShowPage(int page)
         {
@@ -104,7 +102,7 @@ namespace MoreSaveSlots
         }
 
         internal static void RefreshSlot(int slot)
-        {   
+        {
             var btn = GetStartMenuButtonForSlot(slot);
             if (btn != null)
             {
@@ -112,7 +110,7 @@ namespace MoreSaveSlots
                 var buttonText = $"{lastWriteTime:t}\n{lastWriteTime:d}";
                 btn.SetButtonText(buttonText);
             }
-                
+
             RefreshSlotText(btn);            
         }
 

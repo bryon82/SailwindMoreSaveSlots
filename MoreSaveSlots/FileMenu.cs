@@ -59,14 +59,14 @@ namespace MoreSaveSlots
                 for (int i = 1; i <= 5; i++)                
                     TryCopy(SlotBackupPath(_copySlotNum, i), SlotBackupPath(_showingListFor, i));
                 
-                string fromFolder = SlotModSavesDirPath(_copySlotNum);
-                string toFolder = SlotModSavesDirPath(_showingListFor);
+                var fromFolder = SlotModSavesDirPath(_copySlotNum);
+                var toFolder = SlotModSavesDirPath(_showingListFor);
                 if (Directory.Exists(fromFolder))
                 {
                     Directory.CreateDirectory(toFolder);
-                    foreach (string file in Directory.GetFiles(fromFolder))
+                    foreach (var file in Directory.GetFiles(fromFolder))
                     {
-                        string destFile = Path.Combine(toFolder, Path.GetFileName(file));
+                        var destFile = Path.Combine(toFolder, Path.GetFileName(file));
                         File.Copy(file, destFile, overwrite: true);
                     }
                 }                
@@ -108,7 +108,7 @@ namespace MoreSaveSlots
             for (int i = 1; i <= 5; i++)
                 TryDelete(SlotBackupPath(_showingListFor, i));
 
-            string modFolder = SlotModSavesDirPath(_showingListFor);
+            var modFolder = SlotModSavesDirPath(_showingListFor);
             if (Directory.Exists(modFolder))
                 Directory.Delete(modFolder, recursive: true);
 

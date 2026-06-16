@@ -1,4 +1,5 @@
-﻿using System.IO;
+﻿using HarmonyLib;
+using System.IO;
 using UnityEngine;
 using static MoreSaveSlots.MSS_Plugin;
 
@@ -50,7 +51,7 @@ namespace MoreSaveSlots
             _previousButton.GetChild(1).GetComponent<TextMesh>().text = "previous";
             _previousButton.GetChild(2).GetComponent<TextMesh>().text = "←";
             _previousButton.GetChild(0).GetComponent<StartMenuButton>().SetPrivateField("type", PREVIOUS_BUTTON);
-            SetTextColor(true, false);
+            SetChangePageTextColor(PREVIOUS_BUTTON, false);
 
             // next button
             _nextButton = GameObject.Instantiate(saveSlotUI.transform.GetChild(10), saveSlotUI.transform);
@@ -243,12 +244,22 @@ namespace MoreSaveSlots
             FileMenuList.GetChild(4).GetChild(1).GetComponent<TextMesh>().color = INACTIVE_COLOR;
         }
 
-        internal static void SetTextColor(bool isPreviousButton, bool isActive)
+        internal static void SetChangePageTextColor(StartMenuButtonType type, bool isActive, bool changeBoth = false)
         {
-            var t = isPreviousButton ? _previousButton : _nextButton;
+            var t = type == PREVIOUS_BUTTON ? _previousButton : _nextButton;
             var color = isActive ? ACTIVE_COLOR : INACTIVE_COLOR;
-            var textMeshes = t.GetComponentsInChildren<TextMesh>();
-            foreach(var textMesh in textMeshes)
+            TextMesh[] textMeshes;
+            if (!changeBoth)
+            {
+                textMeshes = t.GetComponentsInChildren<TextMesh>();
+            }
+            else
+            {
+                textMeshes = _previousButton.GetComponentsInChildren<TextMesh>();
+                textMeshes.AddRangeToArray(_nextButton.GetComponentsInChildren<TextMesh>());
+            }
+
+            foreach (var textMesh in textMeshes)
             {
                 textMesh.color = color;
             }

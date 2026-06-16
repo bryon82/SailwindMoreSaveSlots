@@ -65,8 +65,8 @@ namespace MoreSaveSlots
         {
             if (displayMesh == null || !_isActive)
                 return;
-            string before = _currentText.Substring(0, _cursorPos);
-            string after = _currentText.Substring(_cursorPos);
+            var before = _currentText.Substring(0, _cursorPos);
+            var after = _currentText.Substring(_cursorPos);
             displayMesh.text = before + (_showCursor ? "|" : " ") + after;
         }
 
@@ -105,7 +105,7 @@ namespace MoreSaveSlots
 
         internal static string LoadName(int slot)
         {
-            string path = SlotMetaPath(slot);
+            var path = SlotMetaPath(slot);
             if (System.IO.File.Exists(path))
                 return System.IO.File.ReadAllText(path).Trim();
             return null;

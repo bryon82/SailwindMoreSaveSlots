@@ -143,7 +143,7 @@ namespace MoreSaveSlots
                 FileMenu.SetShowingListFor(parentSlotButton.saveSlot);
 
                 ___showingListFor = parentSlotButton.saveSlot;
-                bool active = false;
+                var active = false;
                 __instance.transform.position = parentSlotButton.transform.parent.position;
                 if (parentSlotButton.saveSlot % 6 <= 2)
                 {
@@ -153,12 +153,12 @@ namespace MoreSaveSlots
                 StartMenuButton[] array = __instance.buttons;
                 foreach (StartMenuButton startMenuButton in array)
                 {
-                    string backupPath = SaveSlots.GetBackupPath(parentSlotButton.saveSlot, startMenuButton.saveSlot);
+                    var backupPath = SaveSlots.GetBackupPath(parentSlotButton.saveSlot, startMenuButton.saveSlot);
                     if (File.Exists(backupPath))
                     {
                         active = true;
-                        DateTime lastWriteTime = File.GetLastWriteTime(backupPath);
-                        string buttonText = lastWriteTime.ToShortTimeString() + "\n" + lastWriteTime.ToShortDateString();
+                        var lastWriteTime = File.GetLastWriteTime(backupPath);
+                        var buttonText = lastWriteTime.ToShortTimeString() + "\n" + lastWriteTime.ToShortDateString();
                         startMenuButton.SetButtonText(buttonText);
                         startMenuButton.transform.parent.gameObject.SetActive(true);
                     }

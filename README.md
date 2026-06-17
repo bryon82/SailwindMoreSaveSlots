@@ -37,9 +37,9 @@ When you click continue and are brought to the screen to select a save slot, you
 
 ### Installation
 
-If updating, remove MoreSaveSlots folders and/or MoreSaveSlots.dll files from previous installations.  
+If updating, remove SaveSlotsPlus folders and/or SaveSlotsPlus.dll files from previous installations.  
 <br>
-Extract the downloaded zip. Inside the extracted MoreSaveSlots-\<version\> folder copy the MoreSaveSlots folder and paste it into the Sailwind/BepInEx/Plugins folder.  
+Extract the downloaded zip. Inside the extracted SaveSlotsPlus-\<version\> folder copy the SaveSlotsPlus folder and paste it into the Sailwind/BepInEx/Plugins folder.  
 
 #### Consider supporting me 🤗
 

@@ -16,7 +16,7 @@ namespace SaveSlotsPlus
         internal const StartMenuButtonType DELETE_BUTTON = (StartMenuButtonType)19;
         internal const StartMenuButtonType CONFIRM_DELETE_BUTTON = (StartMenuButtonType)20;
 
-        internal static TextMesh PageNumTextMesh { get; private set; }        
+        internal static TextMesh PageNumTextMesh { get; private set; }
         internal static Transform FileMenuList { get; private set; }
 
         private static Transform _renameScroll;
@@ -74,7 +74,7 @@ namespace SaveSlotsPlus
             crbText.localPosition = new Vector3(0.0028f, 0.025f, 0.0009f);
             var crbTextMesh = crbText.GetComponent<TextMesh>();
             crbTextMesh.text = "confirm\nrename";
-            crbTextMesh.fontSize = 60;            
+            crbTextMesh.fontSize = 60;
             _confirmRenameButton.GetChild(0).GetComponent<StartMenuButton>().SetPrivateField("type", CONFIRM_RENAME_BUTTON);
             GameObject.Destroy(_confirmRenameButton.GetChild(1).gameObject);
             _confirmRenameButton.gameObject.SetActive(false);
@@ -157,7 +157,7 @@ namespace SaveSlotsPlus
             confirmDeleteButton.name = "confirm delete button";
             confirmDeleteButton.GetChild(1).GetComponent<TextMesh>().text = "confirm\ndelete";
             confirmDeleteButton.GetChild(0).GetComponent<StartMenuButton>().SetPrivateField("type", CONFIRM_DELETE_BUTTON);
-        }        
+        }
 
         internal static void ShowRenameInput()
         {
@@ -206,7 +206,7 @@ namespace SaveSlotsPlus
                 {
                     _listWasInactive = true;
                     return;
-                }                    
+                }
 
                 _list.gameObject.SetActive(false);
             }
@@ -221,7 +221,7 @@ namespace SaveSlotsPlus
                     _listWasInactive = false;
                     return;
                 }
-                
+
                 _list.gameObject.SetActive(true);
             }
         }
@@ -248,20 +248,23 @@ namespace SaveSlotsPlus
         {
             var t = type == PREVIOUS_BUTTON ? _previousButton : _nextButton;
             var color = isActive ? ACTIVE_COLOR : INACTIVE_COLOR;
-            TextMesh[] textMeshes;
             if (!changeBoth)
             {
-                textMeshes = t.GetComponentsInChildren<TextMesh>();
+                foreach(var textMesh in t.GetComponentsInChildren<TextMesh>())
+                {
+                    textMesh.color = color;
+                }
             }
             else
             {
-                textMeshes = _previousButton.GetComponentsInChildren<TextMesh>();
-                textMeshes.AddRangeToArray(_nextButton.GetComponentsInChildren<TextMesh>());
-            }
-
-            foreach (var textMesh in textMeshes)
-            {
-                textMesh.color = color;
+                foreach (var textMesh in _previousButton.GetComponentsInChildren<TextMesh>())
+                {
+                    textMesh.color = color;
+                }
+                foreach (var textMesh in _nextButton.GetComponentsInChildren<TextMesh>())
+                {
+                    textMesh.color = color;
+                }
             }
         }
 

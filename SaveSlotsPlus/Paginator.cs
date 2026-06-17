@@ -12,11 +12,11 @@ namespace SaveSlotsPlus
         internal const int SLOTS_PER_PAGE = 6;
         private static int _currentPage = 0;
         private static readonly List<GameObject> _allSlotRoots = new List<GameObject>();
-        private static BackupSavesListUI _backUpSavesListUI;        
+        private static BackupSavesListUI _backUpSavesListUI;
 
         public static void AddMoreSaveSlots(BackupSavesListUI backupSavesListUI, StartMenuButton[] existingButtons)
         {
-            _backUpSavesListUI = backupSavesListUI;            
+            _backUpSavesListUI = backupSavesListUI;
             var slotButtons = existingButtons
             .Where(b => b.GetPrivateField<StartMenuButtonType>("type") == StartMenuButtonType.Slot)
             .OrderBy(b => b.saveSlot)
@@ -61,17 +61,17 @@ namespace SaveSlotsPlus
         }
 
         public static void PreviousButtonClicked()
-        {            
+        {
             SaveSlotsUI.HideFileMenu();
             SaveSlotsUI.HideRenameInput();
             _backUpSavesListUI.HideList();
             _currentPage = Mathf.Max(0, _currentPage - 1);
             SaveSlotsUI.SetChangePageTextColor(SaveSlotsUI.PREVIOUS_BUTTON, true, true);
-            if (_currentPage == 0)            
+            if (_currentPage == 0)
                 SaveSlotsUI.SetChangePageTextColor(SaveSlotsUI.PREVIOUS_BUTTON, false);
             SaveSlotsUI.UpdatePageNumText(_currentPage);
             ShowPage(_currentPage);
-            LogDebug($"Previous button clicked, showing page {_currentPage}");
+            LogDebug($"Previous button clicked, showing page {_currentPage + 1}");
         }
 
         public static void NextButtonClicked()
@@ -85,7 +85,7 @@ namespace SaveSlotsPlus
                 SaveSlotsUI.SetChangePageTextColor(SaveSlotsUI.NEXT_BUTTON, false);
             SaveSlotsUI.UpdatePageNumText(_currentPage);
             ShowPage(_currentPage);
-            LogDebug($"Next button clicked, showing page {_currentPage}");
+            LogDebug($"Next button clicked, showing page {_currentPage + 1}");
         }
 
         private static void ShowPage(int page)
@@ -111,7 +111,7 @@ namespace SaveSlotsPlus
                 btn.SetButtonText(buttonText);
             }
 
-            RefreshSlotText(btn);            
+            RefreshSlotText(btn);
         }
 
         internal static StartMenuButton GetStartMenuButtonForSlot(int slot)

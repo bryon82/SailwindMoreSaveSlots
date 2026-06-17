@@ -1,10 +1,12 @@
 ﻿using BepInEx.Configuration;
+using UnityEngine;
 
 namespace SaveSlotsPlus
 {
     internal class Configs
     {
         internal static ConfigEntry<int> numPages;
+        internal static ConfigEntry<KeyCode> altClickKey;
 
         internal static void InitializeConfigs()
         {
@@ -17,6 +19,11 @@ namespace SaveSlotsPlus
                 new ConfigDescription(
                     "The number of pages of save slots. Each page has 6 slots.",
                     new AcceptableValueRange<int>(1, 10)));
+            altClickKey = config.Bind(
+                "Settings",
+                "Alt Click Key",
+                KeyCode.Mouse1,
+                "Key to click on a save slot to open the file menu.");
         }
     }
 }

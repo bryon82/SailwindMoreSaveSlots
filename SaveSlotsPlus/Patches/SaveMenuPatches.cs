@@ -68,7 +68,7 @@ namespace SaveSlotsPlus
                 {
                     FileMenu.CopyButtonClicked();
                     SaveSlotsUI.CopyButtonClicked();
-                }                    
+                }
 
                 else if (button == SaveSlotsUI.PASTE_BUTTON)
                     FileMenu.PasteButtonClicked();
@@ -106,7 +106,7 @@ namespace SaveSlotsPlus
             [HarmonyPatch("Awake")]
             public static void AwakePatch(StartMenuButton __instance, StartMenuButtonType ___type)
             {
-                if (___type == StartMenuButtonType.Slot)                
+                if (___type == StartMenuButtonType.Slot)
                     Paginator.RefreshSlotText(__instance);
             }
 
@@ -117,8 +117,8 @@ namespace SaveSlotsPlus
                 if (__instance.GetPrivateField<StartMenuButtonType>("type") != StartMenuButtonType.Slot)
                     return;
 
-                if (__instance.GetPrivateField<bool>("isLookedAt") && Input.GetMouseButtonDown(1))
-                {                    
+                if (__instance.GetPrivateField<bool>("isLookedAt") && Input.GetKeyDown(altClickKey.Value))
+                {
                     SaveSlotsUI.ToggleFileMenu(__instance);
                 }
             }
@@ -126,7 +126,7 @@ namespace SaveSlotsPlus
 
         [HarmonyPatch(typeof(BackupSavesListUI))]
         private class BackupSavesListUIPatches
-        {            
+        {
             [HarmonyPrefix]
             [HarmonyPatch("ShowList")]
             public static bool ShowList(StartMenuButton parentSlotButton, BackupSavesListUI __instance, ref int ___showingListFor)

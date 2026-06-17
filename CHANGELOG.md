@@ -2,6 +2,14 @@
 
 All notable changes to this project will be documented in this file.
 
+## [v2.1.0] - 2026-06-17
+
+### Changed
+- Renamed from MoreSaveSlots to SaveSlotsPlus.
+
+### Added
+- Config option to change what the alt click key is, defaulted to right mouse button.
+
 ## [v2.0.0] - 2026-06-16
 
 ### Added

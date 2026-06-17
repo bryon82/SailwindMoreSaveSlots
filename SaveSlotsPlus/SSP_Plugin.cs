@@ -8,7 +8,7 @@ namespace SaveSlotsPlus
     [BepInPlugin(PLUGIN_GUID, PLUGIN_NAME, PLUGIN_VERSION)]
     public class SSP_Plugin : BaseUnityPlugin
     {
-        public const string PLUGIN_GUID = "com.raddude.saveslotsplus";
+        public const string PLUGIN_GUID = "com.raddude82.saveslotsplus";
         public const string PLUGIN_NAME = "SaveSlotsPlus";
         public const string PLUGIN_VERSION = "2.1.0";
 

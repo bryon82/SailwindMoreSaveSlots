@@ -1,9 +1,9 @@
-# SaveSlotsPlus
+# Save Slots Plus
 
 Sailwind mod that adds more save slots, save slot naming, and save slot file management. 
 <br>
 
-![Screenshot of continue save menu with page selection and file menu](https://github.com/bryon82/SailwindMoreSaveSlots/blob/main/Screenshots/FileMenu.png)
+![Screenshot of continue save menu with page selection and file menu](https://github.com/bryon82/SailwindSaveSlotsPlus/blob/main/Screenshots/FileMenu.png)
 
 <br>
 

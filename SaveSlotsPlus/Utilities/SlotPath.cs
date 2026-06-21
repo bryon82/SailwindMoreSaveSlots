@@ -5,16 +5,11 @@ namespace SaveSlotsPlus
 {
     internal class SlotPath
     {
-        private static string _basePath;
+        private static string _basePath = Application.persistentDataPath;
 
-        internal static void SetBasePath()
+        internal static void SetBasePath(string path)
         {
-            _basePath = Application.persistentDataPath;
-
-            if (PortableSavesDetected)
-            {
-                _basePath = $"{Application.dataPath}/Saves";
-            }
+            _basePath = path;
         }
 
         internal static string SlotSavePath(int slot)

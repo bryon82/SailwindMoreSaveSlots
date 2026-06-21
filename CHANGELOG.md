@@ -2,6 +2,11 @@
 
 All notable changes to this project will be documented in this file.
 
+## [v2.2.1] - 2026-06-21
+
+### Changed
+- Use public property from PortableSaves for path instead of hard coded path.
+
 ## [v2.2.0] - 2026-06-21
 
 ### Added

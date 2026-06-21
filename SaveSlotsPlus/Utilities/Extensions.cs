@@ -4,6 +4,11 @@ namespace SaveSlotsPlus
 {
     internal static class Extensions
     {
+        public static T GetStaticProperty<T>(this object obj, string property)
+        {
+            return (T)Traverse.Create(obj.GetType()).Property(property).GetValue();
+        }
+
         public static T GetPrivateField<T>(this object obj, string field)
         {
             return (T)Traverse.Create(obj).Field(field).GetValue();

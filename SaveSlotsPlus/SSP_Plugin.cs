@@ -12,11 +12,9 @@ namespace SaveSlotsPlus
     {
         public const string PLUGIN_GUID = "com.raddude.saveslotsplus";
         public const string PLUGIN_NAME = "SaveSlotsPlus";
-        public const string PLUGIN_VERSION = "2.2.0";
+        public const string PLUGIN_VERSION = "2.2.1";
 
-        public const string PORTABLE_SAVES_GUID = "com.nandbrew.PortableSaves";
-
-        internal static bool PortableSavesDetected { get; private set; } = false;
+        public const string PORTABLE_SAVES_GUID = "com.nandbrew.PortableSaves";        
 
         internal static SSP_Plugin Instance { get; private set; }
         private static ManualLogSource _logger;
@@ -42,12 +40,13 @@ namespace SaveSlotsPlus
                 if (metadata.GUID.Equals(PORTABLE_SAVES_GUID))
                 {
                     LogInfo("PortableSaves mod found");
-                    PortableSavesDetected = true;
+                    var portableSavesPath = plugin.Value.Instance.GetStaticProperty<string>("PortableSavePath");
+                    LogDebug($"PortableSaves path: {portableSavesPath}");
+                    SlotPath.SetBasePath(portableSavesPath);
                     break;
                 }
             }
 
-            SlotPath.SetBasePath();
             Configs.InitializeConfigs();
             Harmony.CreateAndPatchAll(Assembly.GetExecutingAssembly(), PLUGIN_GUID);
         }

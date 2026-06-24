@@ -2,6 +2,12 @@
 
 All notable changes to this project will be documented in this file.
 
+## [v2.2.2] - 2026-06-24
+
+### Fixed
+- Disabled allowing file menu in New Game slot menu.
+- Continue or New Game text from NANDTweaks getting stuck with Continue text.
+
 ## [v2.2.1] - 2026-06-21
 
 ### Changed

@@ -12,9 +12,9 @@ namespace SaveSlotsPlus
     {
         public const string PLUGIN_GUID = "com.raddude.saveslotsplus";
         public const string PLUGIN_NAME = "SaveSlotsPlus";
-        public const string PLUGIN_VERSION = "2.2.1";
+        public const string PLUGIN_VERSION = "2.2.2";
 
-        public const string PORTABLE_SAVES_GUID = "com.nandbrew.PortableSaves";        
+        public const string PORTABLE_SAVES_GUID = "com.nandbrew.PortableSaves";
 
         internal static SSP_Plugin Instance { get; private set; }
         private static ManualLogSource _logger;

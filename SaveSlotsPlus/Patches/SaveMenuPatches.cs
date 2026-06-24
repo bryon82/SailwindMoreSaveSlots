@@ -8,7 +8,9 @@ namespace SaveSlotsPlus
 {
     internal class SaveMenuPatches
     {
-        private static TextMesh _nandTweaksLabelText = null;
+        private static TextMesh _nandTweaksLabelTextMesh = null;
+        private static string _nandTweaksLabelText = "New Game";
+        private static bool _selectedContinue = false;
 
         [HarmonyPatch(typeof(SaveSlots), "Awake")]
         private class SaveSlotsPatches
@@ -47,13 +49,13 @@ namespace SaveSlotsPlus
             [HarmonyPatch("EnableSlotMenu")]
             public static void GetLabelText(GameObject ___saveSlotUI)
             {
-                if (_nandTweaksLabelText == null)
-                    _nandTweaksLabelText = ___saveSlotUI.transform.Find("label text").GetComponent<TextMesh>();
+                if (_nandTweaksLabelTextMesh == null)
+                    _nandTweaksLabelTextMesh = ___saveSlotUI.transform.Find("label text").GetComponent<TextMesh>();
             }
 
             [HarmonyPrefix]
             [HarmonyPatch("ButtonClick", typeof(StartMenuButtonType))]
-            public static bool ButtonClickPatch(StartMenuButtonType button, GameObject ___saveSlotUI)
+            public static bool ButtonClickPatch(StartMenuButtonType button)
             {
                 if (button == SaveSlotsUI.PREVIOUS_BUTTON)
                     Paginator.PreviousButtonClicked();
@@ -92,6 +94,20 @@ namespace SaveSlotsPlus
                     return true;
                 }
 
+                else if (button == StartMenuButtonType.NewGame)
+                {
+                    _selectedContinue = false;
+                    _nandTweaksLabelText = "New Game";
+                    return true;
+                }
+
+                else if(button == StartMenuButtonType.Continue)
+                {
+                    _selectedContinue= true;
+                    _nandTweaksLabelText = "Continue";
+                    return true;
+                }
+
                 else
                     return true;
 
@@ -112,9 +128,9 @@ namespace SaveSlotsPlus
 
             [HarmonyPostfix]
             [HarmonyPatch("ExtraLateUpdate")]
-            public static void ExtraLateUpdatePatch(StartMenuButton __instance)
+            public static void ExtraLateUpdatePatch(StartMenuButton __instance, StartMenuButtonType ___type)
             {
-                if (__instance.GetPrivateField<StartMenuButtonType>("type") != StartMenuButtonType.Slot)
+                if (___type != StartMenuButtonType.Slot || !_selectedContinue)
                     return;
 
                 if (__instance.GetPrivateField<bool>("isLookedAt") && Input.GetKeyDown(altClickKey.Value))
@@ -196,14 +212,14 @@ namespace SaveSlotsPlus
                 if (___showingListFor % 6 == 1 && (__instance.list.gameObject.activeInHierarchy || SaveSlotsUI.FileMenuList.gameObject.activeInHierarchy))
                 {
                     __instance.chooseSlotText.SetActive(false);
-                    if (_nandTweaksLabelText != null && _nandTweaksLabelText.text != "")
-                        _nandTweaksLabelText.text = "";
+                    if (_nandTweaksLabelTextMesh != null && _nandTweaksLabelTextMesh.text != "")
+                        _nandTweaksLabelTextMesh.text = "";
                 }
                 else
                 {
                     __instance.chooseSlotText.SetActive(true);
-                    if (_nandTweaksLabelText != null && _nandTweaksLabelText.text != "Continue")
-                        _nandTweaksLabelText.text = "Continue";
+                    if (_nandTweaksLabelTextMesh != null && _nandTweaksLabelTextMesh.text == "")
+                        _nandTweaksLabelTextMesh.text = _nandTweaksLabelText;
                 }
 
                 return false;
